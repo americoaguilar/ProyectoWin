@@ -1,6 +1,6 @@
-using Entidades.Categoria;
 using Entidades.General;
-using LogicaNegocios.Categorias;
+using Entidades.UbigeoZona;
+using LogicaNegocios.UbigeoZonas;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -8,41 +8,41 @@ namespace mmm.control.Controllers
 {
     [ApiController]
     [Route("api/[controller]/[action]")]
-    public class CategoriaController : ControllerBase
+    public class UbigeoZonaController : ControllerBase
     {
-        private ClsCategoria ObjCategoria = null;
-        private readonly ClsCategoriaLn ObjCategoriaLn = new ClsCategoriaLn();
+        private ClsUbigeoZona ObjUbigeoZona = null;
+        private readonly ClsUbigeoZonaLn ObjUbigeoZonaLn = new ClsUbigeoZonaLn();
 
         [HttpGet]
-        public IActionResult GetCategorias()
+        public IActionResult GetUbigeoZonas()
         {
-            ObjCategoria = new ClsCategoria();
-            ObjCategoriaLn.Index(ref ObjCategoria);
-            if (ObjCategoria.MensajeError == null)
+            ObjUbigeoZona = new ClsUbigeoZona();
+            ObjUbigeoZonaLn.Index(ref ObjUbigeoZona);
+            if (ObjUbigeoZona.MensajeError == null)
             {
-                return Ok(JsonConvert.SerializeObject(ObjCategoria.DtResultados, Formatting.Indented));
+                return Ok(JsonConvert.SerializeObject(ObjUbigeoZona.DtResultados, Formatting.Indented));
             }
             else
             {
                 ClsResultado clsResultado = new ClsResultado();
                 clsResultado.Codigo = -1;
-                clsResultado.Mensaje_Respuesta = ObjCategoria.MensajeError;
+                clsResultado.Mensaje_Respuesta = ObjUbigeoZona.MensajeError;
                 return BadRequest(JsonConvert.SerializeObject(clsResultado, Formatting.Indented));
             }
         }
 
 
         [HttpGet]
-        public IActionResult GetCategoria(int id)
+        public IActionResult GetUbigeoZona(string id)
         {
-            ObjCategoria = new ClsCategoria();
-            ObjCategoria.IdCategoria = Convert.ToByte(id.ToString());
-            ObjCategoriaLn.Read(ref ObjCategoria);
-            if (ObjCategoria.MensajeError == null)
+            ObjUbigeoZona = new ClsUbigeoZona();
+            ObjUbigeoZona.IdUbigeoZona = id.ToString();
+            ObjUbigeoZonaLn.Read(ref ObjUbigeoZona);
+            if (ObjUbigeoZona.MensajeError == null)
             {
-                if (ObjCategoria.DtResultados.Rows.Count > 0)
+                if (ObjUbigeoZona.DtResultados.Rows.Count > 0)
                 {
-                    return Ok(JsonConvert.SerializeObject(ObjCategoria.DtResultados, Formatting.Indented));
+                    return Ok(JsonConvert.SerializeObject(ObjUbigeoZona.DtResultados, Formatting.Indented));
                 }
                 else
                 {
@@ -56,7 +56,7 @@ namespace mmm.control.Controllers
             {
                 ClsResultado clsResultado= new ClsResultado();
                 clsResultado.Codigo = -1;
-                clsResultado.Mensaje_Respuesta = ObjCategoria.MensajeError;
+                clsResultado.Mensaje_Respuesta = ObjUbigeoZona.MensajeError;
                 return BadRequest(JsonConvert.SerializeObject(clsResultado, Formatting.Indented));
             }
 
@@ -64,38 +64,38 @@ namespace mmm.control.Controllers
 
 
         [HttpPost]
-        public IActionResult CreateCategoria(ClsCategoria categoria)
+        public IActionResult CreateUbigeoZona(ClsUbigeoZona ubigeozona)
         {
-            ObjCategoria = new ClsCategoria();
-            ObjCategoria.Descripcion = categoria.Descripcion.ToString();
-            ObjCategoria.Estado = Convert.ToBoolean(categoria.Estado);
-            ObjCategoriaLn.Create(ref ObjCategoria);
-            if (ObjCategoria.MensajeError == null)
+            ObjUbigeoZona = new ClsUbigeoZona();
+            ObjUbigeoZona.Descripcion = ubigeozona.Descripcion.ToString();
+            ObjUbigeoZona.Estado = Convert.ToBoolean(ubigeozona.Estado);
+            ObjUbigeoZonaLn.Create(ref ObjUbigeoZona);
+            if (ObjUbigeoZona.MensajeError == null)
             {
-                return Ok(JsonConvert.SerializeObject(ObjCategoria.DtResultados, Formatting.Indented));
+                return Ok(JsonConvert.SerializeObject(ObjUbigeoZona.DtResultados, Formatting.Indented));
             }
             else
             {
                 ClsResultado clsResultado = new ClsResultado();
                 clsResultado.Codigo = -1;
-                clsResultado.Mensaje_Respuesta = ObjCategoria.MensajeError;
+                clsResultado.Mensaje_Respuesta = ObjUbigeoZona.MensajeError;
                 return BadRequest(JsonConvert.SerializeObject(clsResultado, Formatting.Indented));
             }
         }
 
         [HttpPatch]
-        public IActionResult UpdateCategoria(ClsCategoria categoria)
+        public IActionResult UpdateUbigeoZona(ClsUbigeoZona ubigeozona)
         {
-            ObjCategoria = new ClsCategoria();
-            ObjCategoria.IdCategoria = Convert.ToByte(categoria.IdCategoria.ToString());
-            ObjCategoria.Descripcion = categoria.Descripcion.ToString();
-            ObjCategoria.Estado = Convert.ToBoolean(categoria.Estado);
-            ObjCategoriaLn.Update(ref ObjCategoria);
-            if (ObjCategoria.MensajeError == null)
+            ObjUbigeoZona = new ClsUbigeoZona();
+            ObjUbigeoZona.IdUbigeoZona = ubigeozona.IdUbigeoZona.ToString();
+            ObjUbigeoZona.Descripcion = ubigeozona.Descripcion.ToString();
+            ObjUbigeoZona.Estado = Convert.ToBoolean(ubigeozona.Estado);
+            ObjUbigeoZonaLn.Update(ref ObjUbigeoZona);
+            if (ObjUbigeoZona.MensajeError == null)
             {
-                if (ObjCategoria.DtResultados.Rows.Count > 0)
+                if (ObjUbigeoZona.DtResultados.Rows.Count > 0)
                 {
-                    return Ok(JsonConvert.SerializeObject(ObjCategoria.DtResultados, Formatting.Indented));
+                    return Ok(JsonConvert.SerializeObject(ObjUbigeoZona.DtResultados, Formatting.Indented));
                 }
                 else
                 {
@@ -109,22 +109,22 @@ namespace mmm.control.Controllers
             {
                 ClsResultado clsResultado = new ClsResultado();
                 clsResultado.Codigo = -1;
-                clsResultado.Mensaje_Respuesta = ObjCategoria.MensajeError;
+                clsResultado.Mensaje_Respuesta = ObjUbigeoZona.MensajeError;
                 return BadRequest(JsonConvert.SerializeObject(clsResultado, Formatting.Indented));
             }
         }
 
         [HttpDelete]
-        public IActionResult DeleteCategoria(int id)
+        public IActionResult DeleteUbigeoZona(string id)
         {
-            ObjCategoria = new ClsCategoria();
-            ObjCategoria.IdCategoria = Convert.ToByte(id.ToString()); 
-            ObjCategoriaLn.Delete(ref ObjCategoria);
-            if (ObjCategoria.MensajeError == null)
+            ObjUbigeoZona = new ClsUbigeoZona();
+            ObjUbigeoZona.IdUbigeoZona = id.ToString(); 
+            ObjUbigeoZonaLn.Delete(ref ObjUbigeoZona);
+            if (ObjUbigeoZona.MensajeError == null)
             {
-                if (ObjCategoria.DtResultados.Rows.Count > 0)
+                if (ObjUbigeoZona.DtResultados.Rows.Count > 0)
                 {
-                    return Ok(JsonConvert.SerializeObject(ObjCategoria.DtResultados, Formatting.Indented));
+                    return Ok(JsonConvert.SerializeObject(ObjUbigeoZona.DtResultados, Formatting.Indented));
                 }
                 else
                 {
@@ -138,7 +138,7 @@ namespace mmm.control.Controllers
             {
                 ClsResultado clsResultado = new ClsResultado();
                 clsResultado.Codigo = -1;
-                clsResultado.Mensaje_Respuesta = ObjCategoria.MensajeError;
+                clsResultado.Mensaje_Respuesta = ObjUbigeoZona.MensajeError;
                 return BadRequest(JsonConvert.SerializeObject(clsResultado, Formatting.Indented));
             }
         }

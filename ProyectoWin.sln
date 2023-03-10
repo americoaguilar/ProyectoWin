@@ -17,7 +17,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entidades", "Entidades\Enti
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.Api", "3.Api", "{F757E98E-1D6F-4EEF-BB9D-E9DBD6B41C11}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mmm.control", "mmm.control\mmm.control.csproj", "{0BB6758E-0DB0-41F1-A31C-33FB4854AABE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "mmm.control", "mmm.control\mmm.control.csproj", "{0BB6758E-0DB0-41F1-A31C-33FB4854AABE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -75,9 +75,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="General\ClsCredencial.cs" />
+    <Compile Include="General\ClsCredencialResultado.cs" />
     <Compile Include="General\ClsResultado.cs" />
-    <Compile Include="Maestros\ClsHabitacion.cs" />
     <Compile Include="Maestros\ClsCategoria.cs" />
+    <Compile Include="Maestros\ClsNivelTipoMiembro.cs" />
+    <Compile Include="Movimientos\ClsIglesiaMiembros.cs" />
+    <Compile Include="Maestros\ClsIglesia.cs" />
+    <Compile Include="Maestros\ClsUbigeoEstado.cs" />
+    <Compile Include="Maestros\ClsUbigeoCiudad.cs" />
+    <Compile Include="Maestros\ClsUbigeoZona.cs" />
+    <Compile Include="Maestros\ClsTipoMiembro.cs" />
+    <Compile Include="Maestros\ClsMiembro.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

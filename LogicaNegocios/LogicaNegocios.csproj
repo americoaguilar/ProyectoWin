@@ -75,7 +75,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Maestros\ClsHabitacionLn.cs" />
+    <Compile Include="Maestros\ClsMiembroLn.cs" />
+    <Compile Include="Maestros\ClsTipoMiembroLn.cs" />
+    <Compile Include="Maestros\ClsUbigeoCiudadLn.cs" />
+    <Compile Include="Maestros\ClsUbigeoEstadoLn.cs" />
+    <Compile Include="Maestros\ClsUbigeoZonaLn.cs" />
+    <Compile Include="Maestros\ClsNivelTipoMiembroLn.cs" />
     <Compile Include="Maestros\ClsCategoriaLn.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

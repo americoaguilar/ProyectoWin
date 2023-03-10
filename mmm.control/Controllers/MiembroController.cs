@@ -1,6 +1,6 @@
-using Entidades.Categoria;
+using Entidades.Miembro;
 using Entidades.General;
-using LogicaNegocios.Categorias;
+using LogicaNegocios.Miembro;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -8,41 +8,41 @@ namespace mmm.control.Controllers
 {
     [ApiController]
     [Route("api/[controller]/[action]")]
-    public class CategoriaController : ControllerBase
+    public class MiembroController : ControllerBase
     {
-        private ClsCategoria ObjCategoria = null;
-        private readonly ClsCategoriaLn ObjCategoriaLn = new ClsCategoriaLn();
+        private ClsMiembro ObjMiembro = null;
+        private readonly ClsMiembroLn ObjMiembroLn = new ClsMiembroLn();
 
         [HttpGet]
-        public IActionResult GetCategorias()
+        public IActionResult GetMiembros()
         {
-            ObjCategoria = new ClsCategoria();
-            ObjCategoriaLn.Index(ref ObjCategoria);
-            if (ObjCategoria.MensajeError == null)
+            ObjMiembro = new ClsMiembro();
+            ObjMiembroLn.Index(ref ObjMiembro);
+            if (ObjMiembro.MensajeError == null)
             {
-                return Ok(JsonConvert.SerializeObject(ObjCategoria.DtResultados, Formatting.Indented));
+                return Ok(JsonConvert.SerializeObject(ObjMiembro.DtResultados, Formatting.Indented));
             }
             else
             {
                 ClsResultado clsResultado = new ClsResultado();
                 clsResultado.Codigo = -1;
-                clsResultado.Mensaje_Respuesta = ObjCategoria.MensajeError;
+                clsResultado.Mensaje_Respuesta = ObjMiembro.MensajeError;
                 return BadRequest(JsonConvert.SerializeObject(clsResultado, Formatting.Indented));
             }
         }
 
 
         [HttpGet]
-        public IActionResult GetCategoria(int id)
+        public IActionResult GetMiembro(string id)
         {
-            ObjCategoria = new ClsCategoria();
-            ObjCategoria.IdCategoria = Convert.ToByte(id.ToString());
-            ObjCategoriaLn.Read(ref ObjCategoria);
-            if (ObjCategoria.MensajeError == null)
+            ObjMiembro = new ClsMiembro();
+            ObjMiembro.IdMiembro = id.ToString();
+            ObjMiembroLn.Read(ref ObjMiembro);
+            if (ObjMiembro.MensajeError == null)
             {
-                if (ObjCategoria.DtResultados.Rows.Count > 0)
+                if (ObjMiembro.DtResultados.Rows.Count > 0)
                 {
-                    return Ok(JsonConvert.SerializeObject(ObjCategoria.DtResultados, Formatting.Indented));
+                    return Ok(JsonConvert.SerializeObject(ObjMiembro.DtResultados, Formatting.Indented));
                 }
                 else
                 {
@@ -56,7 +56,7 @@ namespace mmm.control.Controllers
             {
                 ClsResultado clsResultado= new ClsResultado();
                 clsResultado.Codigo = -1;
-                clsResultado.Mensaje_Respuesta = ObjCategoria.MensajeError;
+                clsResultado.Mensaje_Respuesta = ObjMiembro.MensajeError;
                 return BadRequest(JsonConvert.SerializeObject(clsResultado, Formatting.Indented));
             }
 
@@ -64,38 +64,42 @@ namespace mmm.control.Controllers
 
 
         [HttpPost]
-        public IActionResult CreateCategoria(ClsCategoria categoria)
+        public IActionResult CreateMiembro(ClsMiembro miembro)
         {
-            ObjCategoria = new ClsCategoria();
-            ObjCategoria.Descripcion = categoria.Descripcion.ToString();
-            ObjCategoria.Estado = Convert.ToBoolean(categoria.Estado);
-            ObjCategoriaLn.Create(ref ObjCategoria);
-            if (ObjCategoria.MensajeError == null)
+            ObjMiembro = new ClsMiembro();
+            ObjMiembro.IdCard = miembro.IdCard.ToString();
+            ObjMiembro.Nombre = miembro.Nombre.ToString();
+            ObjMiembro.IdMiembro = miembro.IdMiembro.ToString();
+            ObjMiembro.Estado = Convert.ToBoolean(miembro.Estado);
+            ObjMiembroLn.Create(ref ObjMiembro);
+            if (ObjMiembro.MensajeError == null)
             {
-                return Ok(JsonConvert.SerializeObject(ObjCategoria.DtResultados, Formatting.Indented));
+                return Ok(JsonConvert.SerializeObject(ObjMiembro.DtResultados, Formatting.Indented));
             }
             else
             {
                 ClsResultado clsResultado = new ClsResultado();
                 clsResultado.Codigo = -1;
-                clsResultado.Mensaje_Respuesta = ObjCategoria.MensajeError;
+                clsResultado.Mensaje_Respuesta = ObjMiembro.MensajeError;
                 return BadRequest(JsonConvert.SerializeObject(clsResultado, Formatting.Indented));
             }
         }
 
         [HttpPatch]
-        public IActionResult UpdateCategoria(ClsCategoria categoria)
+        public IActionResult UpdateMiembro(ClsMiembro miembro)
         {
-            ObjCategoria = new ClsCategoria();
-            ObjCategoria.IdCategoria = Convert.ToByte(categoria.IdCategoria.ToString());
-            ObjCategoria.Descripcion = categoria.Descripcion.ToString();
-            ObjCategoria.Estado = Convert.ToBoolean(categoria.Estado);
-            ObjCategoriaLn.Update(ref ObjCategoria);
-            if (ObjCategoria.MensajeError == null)
+            ObjMiembro = new ClsMiembro();
+            ObjMiembro.IdMiembro = miembro.IdMiembro.ToString();
+            ObjMiembro.IdCard = miembro.IdCard.ToString();
+            ObjMiembro.Nombre = miembro.Nombre.ToString();
+            ObjMiembro.IdMiembro = miembro.IdMiembro.ToString();
+            ObjMiembro.Estado = Convert.ToBoolean(miembro.Estado);
+            ObjMiembroLn.Update(ref ObjMiembro);
+            if (ObjMiembro.MensajeError == null)
             {
-                if (ObjCategoria.DtResultados.Rows.Count > 0)
+                if (ObjMiembro.DtResultados.Rows.Count > 0)
                 {
-                    return Ok(JsonConvert.SerializeObject(ObjCategoria.DtResultados, Formatting.Indented));
+                    return Ok(JsonConvert.SerializeObject(ObjMiembro.DtResultados, Formatting.Indented));
                 }
                 else
                 {
@@ -109,22 +113,22 @@ namespace mmm.control.Controllers
             {
                 ClsResultado clsResultado = new ClsResultado();
                 clsResultado.Codigo = -1;
-                clsResultado.Mensaje_Respuesta = ObjCategoria.MensajeError;
+                clsResultado.Mensaje_Respuesta = ObjMiembro.MensajeError;
                 return BadRequest(JsonConvert.SerializeObject(clsResultado, Formatting.Indented));
             }
         }
 
         [HttpDelete]
-        public IActionResult DeleteCategoria(int id)
+        public IActionResult DeleteMiembro(string id)
         {
-            ObjCategoria = new ClsCategoria();
-            ObjCategoria.IdCategoria = Convert.ToByte(id.ToString()); 
-            ObjCategoriaLn.Delete(ref ObjCategoria);
-            if (ObjCategoria.MensajeError == null)
+            ObjMiembro = new ClsMiembro();
+            ObjMiembro.IdMiembro = id.ToString(); 
+            ObjMiembroLn.Delete(ref ObjMiembro);
+            if (ObjMiembro.MensajeError == null)
             {
-                if (ObjCategoria.DtResultados.Rows.Count > 0)
+                if (ObjMiembro.DtResultados.Rows.Count > 0)
                 {
-                    return Ok(JsonConvert.SerializeObject(ObjCategoria.DtResultados, Formatting.Indented));
+                    return Ok(JsonConvert.SerializeObject(ObjMiembro.DtResultados, Formatting.Indented));
                 }
                 else
                 {
@@ -138,7 +142,7 @@ namespace mmm.control.Controllers
             {
                 ClsResultado clsResultado = new ClsResultado();
                 clsResultado.Codigo = -1;
-                clsResultado.Mensaje_Respuesta = ObjCategoria.MensajeError;
+                clsResultado.Mensaje_Respuesta = ObjMiembro.MensajeError;
                 return BadRequest(JsonConvert.SerializeObject(clsResultado, Formatting.Indented));
             }
         }
