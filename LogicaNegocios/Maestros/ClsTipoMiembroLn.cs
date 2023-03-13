@@ -37,6 +37,7 @@ namespace LogicaNegocios.TipoMiembro
 
             ObjDataBase.DtParametros.Rows.Add(@"@oDescripcion", "17", ObjTipoMiembro.Descripcion);
             ObjDataBase.DtParametros.Rows.Add(@"@oEstado", "4", (ObjTipoMiembro.Estado == true ?1 :0));
+            ObjDataBase.DtParametros.Rows.Add(@"@oUsuario", "17", ObjTipoMiembro.Usuario);
 
             Ejecutar(ref ObjTipoMiembro);
         }
@@ -67,6 +68,7 @@ namespace LogicaNegocios.TipoMiembro
             ObjDataBase.DtParametros.Rows.Add(@"@oIdTipoMiembro", "17", ObjTipoMiembro.IdTipoMiembro);
             ObjDataBase.DtParametros.Rows.Add(@"@oDescripcion", "17", ObjTipoMiembro.Descripcion);
             ObjDataBase.DtParametros.Rows.Add(@"@oEstado", "4", (ObjTipoMiembro.Estado == true ? 1 : 0));
+            ObjDataBase.DtParametros.Rows.Add(@"@oUsuario", "17", ObjTipoMiembro.Usuario);
 
             Ejecutar(ref ObjTipoMiembro);
         }
@@ -81,6 +83,7 @@ namespace LogicaNegocios.TipoMiembro
             };
 
             ObjDataBase.DtParametros.Rows.Add(@"@oIdTipoMiembro", "17", ObjTipoMiembro.IdTipoMiembro);
+            ObjDataBase.DtParametros.Rows.Add(@"@oUsuario", "17", ObjTipoMiembro.Usuario);
 
             Ejecutar(ref ObjTipoMiembro);
         }
@@ -100,7 +103,9 @@ namespace LogicaNegocios.TipoMiembro
                 else
                 {
                     ObjTipoMiembro.DtResultados = ObjDataBase.DsResultados.Tables[0];
-                    if (ObjTipoMiembro.DtResultados.Rows.Count == 1)
+                    if (ObjTipoMiembro.DtResultados.Rows.Count == 1
+                        && ObjTipoMiembro.DtResultados.Rows[0][0].ToString().Substring(0, 1) != "-"
+                        && ObjTipoMiembro.DtResultados.Rows[0][0].ToString().Substring(0, 1) != "0")
                     {
                         foreach (DataRow item in ObjTipoMiembro.DtResultados.Rows)
                         {

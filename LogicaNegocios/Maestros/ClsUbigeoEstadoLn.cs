@@ -36,7 +36,9 @@ namespace LogicaNegocios.UbigeoEstados
             };
 
             ObjDataBase.DtParametros.Rows.Add(@"@oDescripcion", "17", ObjUbigeoEstado.Descripcion);
+            ObjDataBase.DtParametros.Rows.Add(@"@oIdUbigeoPais", "17", ObjUbigeoEstado.IdUbigeoPais);
             ObjDataBase.DtParametros.Rows.Add(@"@oEstado", "4", (ObjUbigeoEstado.Estado == true ?1 :0));
+            ObjDataBase.DtParametros.Rows.Add(@"@ousuario", "17", ObjUbigeoEstado.Usuario);
 
             Ejecutar(ref ObjUbigeoEstado);
         }
@@ -66,7 +68,9 @@ namespace LogicaNegocios.UbigeoEstados
             
             ObjDataBase.DtParametros.Rows.Add(@"@oIdUbigeoEstado", "17", ObjUbigeoEstado.IdUbigeoEstado);
             ObjDataBase.DtParametros.Rows.Add(@"@oDescripcion", "17", ObjUbigeoEstado.Descripcion);
+            ObjDataBase.DtParametros.Rows.Add(@"@oIdUbigeoPais", "17", ObjUbigeoEstado.IdUbigeoPais);
             ObjDataBase.DtParametros.Rows.Add(@"@oEstado", "4", (ObjUbigeoEstado.Estado == true ? 1 : 0));
+            ObjDataBase.DtParametros.Rows.Add(@"@oUsuario", "17", ObjUbigeoEstado.Usuario);
 
             Ejecutar(ref ObjUbigeoEstado);
         }
@@ -81,6 +85,7 @@ namespace LogicaNegocios.UbigeoEstados
             };
 
             ObjDataBase.DtParametros.Rows.Add(@"@oIdUbigeoEstado", "17", ObjUbigeoEstado.IdUbigeoEstado);
+            ObjDataBase.DtParametros.Rows.Add(@"@oUsuario", "17", ObjUbigeoEstado.Usuario);
 
             Ejecutar(ref ObjUbigeoEstado);
         }
@@ -100,12 +105,15 @@ namespace LogicaNegocios.UbigeoEstados
                 else
                 {
                     ObjUbigeoEstado.DtResultados = ObjDataBase.DsResultados.Tables[0];
-                    if (ObjUbigeoEstado.DtResultados.Rows.Count == 1)
+                    if (ObjUbigeoEstado.DtResultados.Rows.Count == 1 
+                            && ObjUbigeoEstado.DtResultados.Rows[0][0].ToString().Substring(0, 1) != "-"
+                            && ObjUbigeoEstado.DtResultados.Rows[0][0].ToString().Substring(0, 1) != "0")
                     {
                         foreach (DataRow item in ObjUbigeoEstado.DtResultados.Rows)
                         {
                             ObjUbigeoEstado.IdUbigeoEstado = item["IdUbigeoEstado"].ToString();
                             ObjUbigeoEstado.Descripcion = item["Descripcion"].ToString();
+                            ObjUbigeoEstado.IdUbigeoPais = item["IdUbigeoPais"].ToString();
                             ObjUbigeoEstado.Estado = Convert.ToBoolean(item["Estado"]);
                         }
                     }

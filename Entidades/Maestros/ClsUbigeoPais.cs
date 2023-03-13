@@ -1,14 +1,12 @@
 ﻿using System.Data;
 
-namespace Entidades.Miembro
+namespace Entidades.UbigeoPais
 {
-    public class ClsMiembro
+    public class ClsUbigeoPais
     {
         #region Atributos Privados
-        private string _idMiembro;
-        private string _idCard;
-        private string _nombre;
-        private string _idTipoMiembro;
+        private string _idUbigeoPais;
+        private string _descripcion;
         private bool _estado;
         private string _usuario;
 
@@ -19,10 +17,8 @@ namespace Entidades.Miembro
         #endregion
 
         #region Atributos Publicos
-        public string IdMiembro { get => _idMiembro; set => _idMiembro = value; }
-        public string IdCard { get => _idCard; set => _idCard = value; }
-        public string Nombre { get => _nombre; set => _nombre = value; }
-        public string IdTipoMiembro { get => _idTipoMiembro; set => _idTipoMiembro = value; }
+        public string IdUbigeoPais { get => _idUbigeoPais; set => _idUbigeoPais = value; }
+        public string Descripcion { get => _descripcion; set => _descripcion = value; }
         public bool Estado { get => _estado; set => _estado = value; }
         public string Usuario { get => _usuario; set => _usuario = value; }
         public int CodigoError { get => _codigoError; set => _codigoError = value; }

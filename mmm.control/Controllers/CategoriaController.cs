@@ -20,13 +20,17 @@ namespace mmm.control.Controllers
             ObjCategoriaLn.Index(ref ObjCategoria);
             if (ObjCategoria.MensajeError == null)
             {
-                return Ok(JsonConvert.SerializeObject(ObjCategoria.DtResultados, Formatting.Indented));
+                if (ObjCategoria.DtResultados.Rows[0][0].ToString().Substring(0, 1) != "-")
+                {
+                    return Ok(JsonConvert.SerializeObject(ObjCategoria.DtResultados, Formatting.Indented));
+                }
+                return BadRequest(JsonConvert.SerializeObject(ObjCategoria.DtResultados, Formatting.Indented));
             }
             else
             {
                 ClsResultado clsResultado = new ClsResultado();
-                clsResultado.Codigo = -1;
-                clsResultado.Mensaje_Respuesta = ObjCategoria.MensajeError;
+                clsResultado.CodigoError = -1;
+                clsResultado.MensajeError = ObjCategoria.MensajeError;
                 return BadRequest(JsonConvert.SerializeObject(clsResultado, Formatting.Indented));
             }
         }
@@ -47,16 +51,16 @@ namespace mmm.control.Controllers
                 else
                 {
                     ClsResultado clsResultado = new ClsResultado();
-                    clsResultado.Codigo = -2;
-                    clsResultado.Mensaje_Respuesta = "No Existe Id de Registro....";
+                    clsResultado.CodigoError = -2;
+                    clsResultado.MensajeError = "No Existe Id de Registro....";
                     return BadRequest(JsonConvert.SerializeObject(clsResultado, Formatting.Indented));
                 }
 
             } else
             {
                 ClsResultado clsResultado= new ClsResultado();
-                clsResultado.Codigo = -1;
-                clsResultado.Mensaje_Respuesta = ObjCategoria.MensajeError;
+                clsResultado.CodigoError = -1;
+                clsResultado.MensajeError = ObjCategoria.MensajeError;
                 return BadRequest(JsonConvert.SerializeObject(clsResultado, Formatting.Indented));
             }
 
@@ -77,8 +81,8 @@ namespace mmm.control.Controllers
             else
             {
                 ClsResultado clsResultado = new ClsResultado();
-                clsResultado.Codigo = -1;
-                clsResultado.Mensaje_Respuesta = ObjCategoria.MensajeError;
+                clsResultado.CodigoError = -1;
+                clsResultado.MensajeError = ObjCategoria.MensajeError;
                 return BadRequest(JsonConvert.SerializeObject(clsResultado, Formatting.Indented));
             }
         }
@@ -100,16 +104,16 @@ namespace mmm.control.Controllers
                 else
                 {
                     ClsResultado clsResultado = new ClsResultado();
-                    clsResultado.Codigo = -2;
-                    clsResultado.Mensaje_Respuesta = "No Existe Id de Registro....";
+                    clsResultado.CodigoError = -2;
+                    clsResultado.MensajeError = "No Existe Id de Registro....";
                     return BadRequest(JsonConvert.SerializeObject(clsResultado, Formatting.Indented));
                 }
             }
             else
             {
                 ClsResultado clsResultado = new ClsResultado();
-                clsResultado.Codigo = -1;
-                clsResultado.Mensaje_Respuesta = ObjCategoria.MensajeError;
+                clsResultado.CodigoError = -1;
+                clsResultado.MensajeError = ObjCategoria.MensajeError;
                 return BadRequest(JsonConvert.SerializeObject(clsResultado, Formatting.Indented));
             }
         }
@@ -129,16 +133,16 @@ namespace mmm.control.Controllers
                 else
                 {
                     ClsResultado clsResultado = new ClsResultado();
-                    clsResultado.Codigo = -2;
-                    clsResultado.Mensaje_Respuesta = "No Existe Id de Registro....";
+                    clsResultado.CodigoError = -2;
+                    clsResultado.MensajeError = "No Existe Id de Registro....";
                     return BadRequest(JsonConvert.SerializeObject(clsResultado, Formatting.Indented));
                 }
             }
             else
             {
                 ClsResultado clsResultado = new ClsResultado();
-                clsResultado.Codigo = -1;
-                clsResultado.Mensaje_Respuesta = ObjCategoria.MensajeError;
+                clsResultado.CodigoError = -1;
+                clsResultado.MensajeError = ObjCategoria.MensajeError;
                 return BadRequest(JsonConvert.SerializeObject(clsResultado, Formatting.Indented));
             }
         }

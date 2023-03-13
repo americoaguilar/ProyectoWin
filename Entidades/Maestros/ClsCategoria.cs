@@ -12,6 +12,7 @@ namespace Entidades.Categoria
         private DateTime _fechaCreacion;
 
         // Atributos de Manejo de la Base de Datos
+        private int _codigoError;
         private string _mensajeError, _valorScalar;
         private DataTable _dtResultados;
         #endregion

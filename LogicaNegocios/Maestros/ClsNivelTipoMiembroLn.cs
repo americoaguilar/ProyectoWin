@@ -103,7 +103,9 @@ namespace LogicaNegocios.NivelesTipoMiembro
                 else
                 {
                     ObjNivelTipoMiembro.DtResultados = ObjDataBase.DsResultados.Tables[0];
-                    if (ObjNivelTipoMiembro.DtResultados.Rows.Count == 1)
+                    if (ObjNivelTipoMiembro.DtResultados.Rows.Count == 1
+                        && ObjNivelTipoMiembro.DtResultados.Rows[0][0].ToString().Substring(0, 1) != "-"
+                        && ObjNivelTipoMiembro.DtResultados.Rows[0][0].ToString().Substring(0, 1) != "0")
                     {
                         foreach (DataRow item in ObjNivelTipoMiembro.DtResultados.Rows)
                         {

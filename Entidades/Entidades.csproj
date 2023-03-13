@@ -80,6 +80,7 @@
     <Compile Include="General\ClsResultado.cs" />
     <Compile Include="Maestros\ClsCategoria.cs" />
     <Compile Include="Maestros\ClsNivelTipoMiembro.cs" />
+    <Compile Include="Maestros\ClsUbigeoPais.cs" />
     <Compile Include="Movimientos\ClsIglesiaMiembros.cs" />
     <Compile Include="Maestros\ClsIglesia.cs" />
     <Compile Include="Maestros\ClsUbigeoEstado.cs" />

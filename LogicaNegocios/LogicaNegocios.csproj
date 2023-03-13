@@ -79,6 +79,7 @@
     <Compile Include="Maestros\ClsTipoMiembroLn.cs" />
     <Compile Include="Maestros\ClsUbigeoCiudadLn.cs" />
     <Compile Include="Maestros\ClsUbigeoEstadoLn.cs" />
+    <Compile Include="Maestros\ClsUbigeoPaisLn.cs" />
     <Compile Include="Maestros\ClsUbigeoZonaLn.cs" />
     <Compile Include="Maestros\ClsNivelTipoMiembroLn.cs" />
     <Compile Include="Maestros\ClsCategoriaLn.cs" />

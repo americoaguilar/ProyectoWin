@@ -36,7 +36,9 @@ namespace LogicaNegocios.UbigeoZonas
             };
 
             ObjDataBase.DtParametros.Rows.Add(@"@oDescripcion", "17", ObjUbigeoZona.Descripcion);
+            ObjDataBase.DtParametros.Rows.Add(@"@oIdUbigeoCiudad", "17", ObjUbigeoZona.IdUbigeoCiudad);
             ObjDataBase.DtParametros.Rows.Add(@"@oEstado", "4", (ObjUbigeoZona.Estado == true ?1 :0));
+            ObjDataBase.DtParametros.Rows.Add(@"@oUsuario", "17", ObjUbigeoZona.Usuario);
 
             Ejecutar(ref ObjUbigeoZona);
         }
@@ -50,7 +52,7 @@ namespace LogicaNegocios.UbigeoZonas
                 Scalar = false
             };
 
-            ObjDataBase.DtParametros.Rows.Add(@"@oIdUbigeoZona", "4", ObjUbigeoZona.IdUbigeoZona);
+            ObjDataBase.DtParametros.Rows.Add(@"@oIdUbigeoZona", "17", ObjUbigeoZona.IdUbigeoZona);
 
             Ejecutar(ref ObjUbigeoZona);
         }
@@ -64,9 +66,11 @@ namespace LogicaNegocios.UbigeoZonas
                 Scalar = false
             };
             
-            ObjDataBase.DtParametros.Rows.Add(@"@oIdUbigeoZona", "4", ObjUbigeoZona.IdUbigeoZona);
+            ObjDataBase.DtParametros.Rows.Add(@"@oIdUbigeoZona", "17", ObjUbigeoZona.IdUbigeoZona);
             ObjDataBase.DtParametros.Rows.Add(@"@oDescripcion", "17", ObjUbigeoZona.Descripcion);
+            ObjDataBase.DtParametros.Rows.Add(@"@oIdUbigeoCiudad", "17", ObjUbigeoZona.IdUbigeoCiudad);
             ObjDataBase.DtParametros.Rows.Add(@"@oEstado", "4", (ObjUbigeoZona.Estado == true ? 1 : 0));
+            ObjDataBase.DtParametros.Rows.Add(@"@oUsuario", "17", ObjUbigeoZona.Usuario);
 
             Ejecutar(ref ObjUbigeoZona);
         }
@@ -80,7 +84,8 @@ namespace LogicaNegocios.UbigeoZonas
                 Scalar = false
             };
 
-            ObjDataBase.DtParametros.Rows.Add(@"@oIdUbigeoZona", "4", ObjUbigeoZona.IdUbigeoZona);
+            ObjDataBase.DtParametros.Rows.Add(@"@oIdUbigeoZona", "17", ObjUbigeoZona.IdUbigeoZona);
+            ObjDataBase.DtParametros.Rows.Add(@"@oUsuario", "17", ObjUbigeoZona.Usuario);
 
             Ejecutar(ref ObjUbigeoZona);
         }
@@ -100,12 +105,15 @@ namespace LogicaNegocios.UbigeoZonas
                 else
                 {
                     ObjUbigeoZona.DtResultados = ObjDataBase.DsResultados.Tables[0];
-                    if (ObjUbigeoZona.DtResultados.Rows.Count == 1)
+                    if (ObjUbigeoZona.DtResultados.Rows.Count == 1
+                        && ObjUbigeoZona.DtResultados.Rows[0][0].ToString().Substring(0, 1) != "-"
+                        && ObjUbigeoZona.DtResultados.Rows[0][0].ToString().Substring(0, 1) != "0")
                     {
                         foreach (DataRow item in ObjUbigeoZona.DtResultados.Rows)
                         {
                             ObjUbigeoZona.IdUbigeoZona = item["IdUbigeoZona"].ToString();
                             ObjUbigeoZona.Descripcion = item["Descripcion"].ToString();
+                            ObjUbigeoZona.IdUbigeoCiudad = item["IdUbigeoCiudad"].ToString();
                             ObjUbigeoZona.Estado = Convert.ToBoolean(item["Estado"]);
                         }
                     }

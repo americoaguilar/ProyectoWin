@@ -37,8 +37,9 @@ namespace LogicaNegocios.Miembro
 
             ObjDataBase.DtParametros.Rows.Add(@"@oNombre", "17", ObjMiembro.IdCard);
             ObjDataBase.DtParametros.Rows.Add(@"@oIdCard", "17", ObjMiembro.Nombre);
-            ObjDataBase.DtParametros.Rows.Add(@"@oIdCard", "17", ObjMiembro.IdTipoMiembro);
+            ObjDataBase.DtParametros.Rows.Add(@"@oIdTipoMiembro", "17", ObjMiembro.IdTipoMiembro);
             ObjDataBase.DtParametros.Rows.Add(@"@oEstado", "4", (ObjMiembro.Estado == true ?1 :0));
+            ObjDataBase.DtParametros.Rows.Add(@"@oUsuario", "17", ObjMiembro.Usuario);
 
             Ejecutar(ref ObjMiembro);
         }
@@ -69,8 +70,9 @@ namespace LogicaNegocios.Miembro
             ObjDataBase.DtParametros.Rows.Add(@"@oIdMiembro", "17", ObjMiembro.IdMiembro);
             ObjDataBase.DtParametros.Rows.Add(@"@oNombre", "17", ObjMiembro.IdCard);
             ObjDataBase.DtParametros.Rows.Add(@"@oIdCard", "17", ObjMiembro.Nombre);
-            ObjDataBase.DtParametros.Rows.Add(@"@oIdCard", "17", ObjMiembro.IdTipoMiembro);
+            ObjDataBase.DtParametros.Rows.Add(@"@oIdTipoMiembro", "17", ObjMiembro.IdTipoMiembro);
             ObjDataBase.DtParametros.Rows.Add(@"@oEstado", "4", (ObjMiembro.Estado == true ? 1 : 0));
+            ObjDataBase.DtParametros.Rows.Add(@"@oUsuario", "17", ObjMiembro.Usuario);
 
             Ejecutar(ref ObjMiembro);
         }
@@ -85,6 +87,7 @@ namespace LogicaNegocios.Miembro
             };
 
             ObjDataBase.DtParametros.Rows.Add(@"@oIdMiembro", "17", ObjMiembro.IdMiembro);
+            ObjDataBase.DtParametros.Rows.Add(@"@oUsuario", "17", ObjMiembro.Usuario);
 
             Ejecutar(ref ObjMiembro);
         }
@@ -104,14 +107,16 @@ namespace LogicaNegocios.Miembro
                 else
                 {
                     ObjMiembro.DtResultados = ObjDataBase.DsResultados.Tables[0];
-                    if (ObjMiembro.DtResultados.Rows.Count == 1)
+                    if (ObjMiembro.DtResultados.Rows.Count == 1
+                        && ObjMiembro.DtResultados.Rows[0][0].ToString().Substring(0, 1) != "-"
+                        && ObjMiembro.DtResultados.Rows[0][0].ToString().Substring(0, 1) != "0")
                     {
                         foreach (DataRow item in ObjMiembro.DtResultados.Rows)
                         {
                             ObjMiembro.IdMiembro = item["IdMiembro"].ToString();
                             ObjMiembro.IdCard = item["IdCard"].ToString();
                             ObjMiembro.Nombre = item["Nombre"].ToString();
-                            ObjMiembro.IdMiembro = item["IdMiembro"].ToString();
+                            ObjMiembro.IdTipoMiembro = item["IdTipoMiembro"].ToString();
                             ObjMiembro.Estado = Convert.ToBoolean(item["Estado"]);
                         }
                     }

@@ -20,15 +20,16 @@ namespace mmm.control.Controllers
             ObjUbigeoZonaLn.Index(ref ObjUbigeoZona);
             if (ObjUbigeoZona.MensajeError == null)
             {
-                return Ok(JsonConvert.SerializeObject(ObjUbigeoZona.DtResultados, Formatting.Indented));
+                if (ObjUbigeoZona.DtResultados.Rows[0][0].ToString().Substring(0, 1) != "-")
+                {
+                    return Ok(JsonConvert.SerializeObject(ObjUbigeoZona.DtResultados, Formatting.Indented));
+                }
+                return BadRequest(JsonConvert.SerializeObject(ObjUbigeoZona.DtResultados, Formatting.Indented));
             }
-            else
-            {
-                ClsResultado clsResultado = new ClsResultado();
-                clsResultado.Codigo = -1;
-                clsResultado.Mensaje_Respuesta = ObjUbigeoZona.MensajeError;
-                return BadRequest(JsonConvert.SerializeObject(clsResultado, Formatting.Indented));
-            }
+            ClsResultado clsResultado = new ClsResultado();
+            clsResultado.CodigoError = -1;
+            clsResultado.MensajeError = ObjUbigeoZona.MensajeError;
+            return BadRequest(JsonConvert.SerializeObject(clsResultado, Formatting.Indented));
         }
 
 
@@ -40,26 +41,16 @@ namespace mmm.control.Controllers
             ObjUbigeoZonaLn.Read(ref ObjUbigeoZona);
             if (ObjUbigeoZona.MensajeError == null)
             {
-                if (ObjUbigeoZona.DtResultados.Rows.Count > 0)
+                if (ObjUbigeoZona.DtResultados.Rows[0][0].ToString().Substring(0, 1) != "-")
                 {
                     return Ok(JsonConvert.SerializeObject(ObjUbigeoZona.DtResultados, Formatting.Indented));
                 }
-                else
-                {
-                    ClsResultado clsResultado = new ClsResultado();
-                    clsResultado.Codigo = -2;
-                    clsResultado.Mensaje_Respuesta = "No Existe Id de Registro....";
-                    return BadRequest(JsonConvert.SerializeObject(clsResultado, Formatting.Indented));
-                }
-
-            } else
-            {
-                ClsResultado clsResultado= new ClsResultado();
-                clsResultado.Codigo = -1;
-                clsResultado.Mensaje_Respuesta = ObjUbigeoZona.MensajeError;
-                return BadRequest(JsonConvert.SerializeObject(clsResultado, Formatting.Indented));
+                return BadRequest(JsonConvert.SerializeObject(ObjUbigeoZona.DtResultados, Formatting.Indented));
             }
-
+            ClsResultado clsResultado= new ClsResultado();
+            clsResultado.CodigoError = -1;
+            clsResultado.MensajeError = ObjUbigeoZona.MensajeError;
+            return BadRequest(JsonConvert.SerializeObject(clsResultado, Formatting.Indented));
         }
 
 
@@ -68,19 +59,22 @@ namespace mmm.control.Controllers
         {
             ObjUbigeoZona = new ClsUbigeoZona();
             ObjUbigeoZona.Descripcion = ubigeozona.Descripcion.ToString();
+            ObjUbigeoZona.IdUbigeoCiudad = ubigeozona.IdUbigeoCiudad.ToString();
             ObjUbigeoZona.Estado = Convert.ToBoolean(ubigeozona.Estado);
+            ObjUbigeoZona.Usuario = ubigeozona.Usuario.ToString();
             ObjUbigeoZonaLn.Create(ref ObjUbigeoZona);
             if (ObjUbigeoZona.MensajeError == null)
             {
-                return Ok(JsonConvert.SerializeObject(ObjUbigeoZona.DtResultados, Formatting.Indented));
+                if (ObjUbigeoZona.DtResultados.Rows[0][0].ToString().Substring(0, 1) != "-")
+                {
+                    return Ok(JsonConvert.SerializeObject(ObjUbigeoZona.DtResultados, Formatting.Indented));
+                }
+                return BadRequest(JsonConvert.SerializeObject(ObjUbigeoZona.DtResultados, Formatting.Indented));
             }
-            else
-            {
-                ClsResultado clsResultado = new ClsResultado();
-                clsResultado.Codigo = -1;
-                clsResultado.Mensaje_Respuesta = ObjUbigeoZona.MensajeError;
-                return BadRequest(JsonConvert.SerializeObject(clsResultado, Formatting.Indented));
-            }
+            ClsResultado clsResultado = new ClsResultado();
+            clsResultado.CodigoError = -1;
+            clsResultado.MensajeError = ObjUbigeoZona.MensajeError;
+            return BadRequest(JsonConvert.SerializeObject(clsResultado, Formatting.Indented));
         }
 
         [HttpPatch]
@@ -89,58 +83,43 @@ namespace mmm.control.Controllers
             ObjUbigeoZona = new ClsUbigeoZona();
             ObjUbigeoZona.IdUbigeoZona = ubigeozona.IdUbigeoZona.ToString();
             ObjUbigeoZona.Descripcion = ubigeozona.Descripcion.ToString();
+            ObjUbigeoZona.IdUbigeoCiudad = ubigeozona.IdUbigeoCiudad.ToString();
             ObjUbigeoZona.Estado = Convert.ToBoolean(ubigeozona.Estado);
+            ObjUbigeoZona.Usuario = ubigeozona.Usuario.ToString();
             ObjUbigeoZonaLn.Update(ref ObjUbigeoZona);
             if (ObjUbigeoZona.MensajeError == null)
             {
-                if (ObjUbigeoZona.DtResultados.Rows.Count > 0)
+                if (ObjUbigeoZona.DtResultados.Rows[0][0].ToString().Substring(0, 1) != "-")
                 {
                     return Ok(JsonConvert.SerializeObject(ObjUbigeoZona.DtResultados, Formatting.Indented));
                 }
-                else
-                {
-                    ClsResultado clsResultado = new ClsResultado();
-                    clsResultado.Codigo = -2;
-                    clsResultado.Mensaje_Respuesta = "No Existe Id de Registro....";
-                    return BadRequest(JsonConvert.SerializeObject(clsResultado, Formatting.Indented));
-                }
+                return BadRequest(JsonConvert.SerializeObject(ObjUbigeoZona.DtResultados, Formatting.Indented));
             }
-            else
-            {
-                ClsResultado clsResultado = new ClsResultado();
-                clsResultado.Codigo = -1;
-                clsResultado.Mensaje_Respuesta = ObjUbigeoZona.MensajeError;
-                return BadRequest(JsonConvert.SerializeObject(clsResultado, Formatting.Indented));
-            }
+            ClsResultado clsResultado = new ClsResultado();
+            clsResultado.CodigoError = -1;
+            clsResultado.MensajeError = ObjUbigeoZona.MensajeError;
+            return BadRequest(JsonConvert.SerializeObject(clsResultado, Formatting.Indented));
         }
 
         [HttpDelete]
-        public IActionResult DeleteUbigeoZona(string id)
+        public IActionResult DeleteUbigeoZona(string id, string usuario)
         {
             ObjUbigeoZona = new ClsUbigeoZona();
-            ObjUbigeoZona.IdUbigeoZona = id.ToString(); 
+            ObjUbigeoZona.IdUbigeoZona = id.ToString();
+            ObjUbigeoZona.Usuario = usuario.ToString();
             ObjUbigeoZonaLn.Delete(ref ObjUbigeoZona);
             if (ObjUbigeoZona.MensajeError == null)
             {
-                if (ObjUbigeoZona.DtResultados.Rows.Count > 0)
+                if (ObjUbigeoZona.DtResultados.Rows[0][0].ToString().Substring(0, 1) != "-")
                 {
                     return Ok(JsonConvert.SerializeObject(ObjUbigeoZona.DtResultados, Formatting.Indented));
                 }
-                else
-                {
-                    ClsResultado clsResultado = new ClsResultado();
-                    clsResultado.Codigo = -2;
-                    clsResultado.Mensaje_Respuesta = "No Existe Id de Registro....";
-                    return BadRequest(JsonConvert.SerializeObject(clsResultado, Formatting.Indented));
-                }
+                return BadRequest(JsonConvert.SerializeObject(ObjUbigeoZona.DtResultados, Formatting.Indented));
             }
-            else
-            {
-                ClsResultado clsResultado = new ClsResultado();
-                clsResultado.Codigo = -1;
-                clsResultado.Mensaje_Respuesta = ObjUbigeoZona.MensajeError;
-                return BadRequest(JsonConvert.SerializeObject(clsResultado, Formatting.Indented));
-            }
+            ClsResultado clsResultado = new ClsResultado();
+            clsResultado.CodigoError = -1;
+            clsResultado.MensajeError = ObjUbigeoZona.MensajeError;
+            return BadRequest(JsonConvert.SerializeObject(clsResultado, Formatting.Indented));
         }
     }
 }
